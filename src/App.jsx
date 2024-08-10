@@ -1,22 +1,26 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from "react";
 
 const InstagramReelFetcher = () => {
-  const [reelUrl, setReelUrl] = useState('');
+  const [reelUrl, setReelUrl] = useState("");
   const [videoData, setVideoData] = useState(null);
-  const [error, setError] = useState('');
+  const [error, setError] = useState("");
 
   const fetchReelDetails = async () => {
     try {
-      const response = await fetch(`https://nextbot.shade.cool/api/insta?url=${encodeURIComponent(reelUrl)}`);
+      const response = await fetch(
+        `https://nextbot.shade.cool/api/insta?url=${encodeURIComponent(
+          reelUrl
+        )}`
+      );
       const data = await response.json();
       if (data.data && data.data.post_video_url) {
         setVideoData(data.data);
-        setError('');
+        setError("");
       } else {
-        setError('Failed to fetch the reel details.');
+        setError("Failed to fetch the reel details.");
       }
     } catch (err) {
-      setError('An error occurred while fetching the reel details.');
+      setError("An error occurred while fetching the reel details.");
     }
   };
 
@@ -25,7 +29,7 @@ const InstagramReelFetcher = () => {
       const text = await navigator.clipboard.readText();
       setReelUrl(text);
     } catch (err) {
-      setError('Failed to paste the URL.');
+      setError("Failed to paste the URL.");
     }
   };
 
@@ -38,7 +42,9 @@ const InstagramReelFetcher = () => {
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-gradient-to-r from-purple-500 via-pink-500 to-red-500 p-4 text-white">
       <div className="bg-white rounded-lg shadow-lg p-6 max-w-md w-full text-gray-900">
-        <h1 className="text-3xl font-bold mb-6 text-center">Instagram Reel Downloader</h1>
+        <h1 className="text-3xl font-bold mb-6 text-center">
+          Instagram Reel Downloader
+        </h1>
         <div className="flex items-center mb-6">
           <input
             type="text"
@@ -91,12 +97,19 @@ const InstagramReelFetcher = () => {
       </div>
       <div className="mt-8 text-sm text-center text-gray-200">
         <p>
-          Disclaimer: This tool is for educational purposes only. We are not affiliated with Instagram, and we do not support the unauthorized downloading or distribution of content. 
+          Disclaimer: This tool is for educational purposes only. We are not
+          affiliated with Instagram, and we do not support the unauthorized
+          downloading or distribution of content.
         </p>
         <p className="mt-2">
-          <a href="#" className="underline">Privacy Policy</a>
+          <a href="#" className="underline">
+            Privacy Policy
+          </a>
         </p>
       </div>
+      <a href="https://visitorbadge.io/status?path=insta">
+        <img src="https://api.visitorbadge.io/api/combined?path=insta&countColor=%23263759&style=plastic&labelStyle=upper" />
+      </a>
     </div>
   );
 };
